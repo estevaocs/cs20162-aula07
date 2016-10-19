@@ -1,16 +1,38 @@
 package com.construcao.calendario;
 
-import java.text.ParseException;
 
 /**
  * Serviços oferecidos para verificar o dia da semana.
  *
- * @author Estevão Cristino
+ * @author Estevão Cristino da Silva
+ * @sice 1.0
  */
 public class Calendario {
-
+    
+    /**
+     *Metodo que irá receber duas datas uma com o dia da semana desconhecido, e 
+     * outra com dia da semana conhecido, um ano referenciano um ano bissexto, e
+     * uma dia da semana, então ela irá verificar se as datas são validas, e 
+     * entao retornará um numero de 0 até 6 referenciando um dia da semana.
+     *
+     *              0 - Domingo
+     *              1 - Segunda
+     *              2 - Terça
+     *              3 - Quarta
+     *              4 - Quinta
+     *              5 - Sexta
+     *              6 - Sabádo
+     * 
+     * 
+     * 
+     * @param data - int - data cujo que saber o dia da semana
+     * @param bissexto - int - numero positivo que irá referenciar um ano bissexto
+     * @param conhecida - int - data cujo ja se conhece o dia da semana
+     * @param ds - o dia da semana da data conhecida
+     * @return int - numero de 0 a 6 referenciando o dia da semana da data desconhecida
+     */
     public static int diaSemana(int data, int bissexto,
-            int conhecida, int ds) throws Exception {
+            int conhecida, int ds) {
 
         int dd;// dia desconhecido
         int dc;// dia conhecido
@@ -50,8 +72,8 @@ public class Calendario {
                                 && (verificaQntDiasNoMes(mc, ac, bissexto) >= dc
                                 && dc > 0)) {
 
-                            int qntDias = qntDias(data, conhecida, ad, ac, md,
-                                    mc, dd, dc, bissexto);
+                            int qntDias = qntDias(ad, ac, md, mc, dd, dc, 
+                                    bissexto);
 
                             if (data == conhecida) {
                                 return ds;
@@ -98,9 +120,10 @@ public class Calendario {
     /**
      * Metodo que verifica a quantidade de dias no Mes
      *
-     * @param mes
-     * @param ano
-     * @return
+     * @param mes - int - mes a verificar quantidade de dias
+     * @param ano - int - ano do mes referenciado, para saber se ano é bissexto
+     * @param bissexto - int - ano de referencia se é bissexto.
+     * @return - int - quantidade de dias no mes
      */
     private static int verificaQntDiasNoMes(int mes, int ano, int bissexto) {
 
@@ -137,7 +160,14 @@ public class Calendario {
         }
         return qntDias;
     }
-
+    
+    /**
+     * Metodo que verifica se um determinado ano é bissexto
+     * 
+     * @param ano - int - ano candidato a ser bissexto
+     * @param bissexto - ano de referncia de um ano bissexto
+     * @return - boolean - true : caso seja um ano bissexto.
+     */
     private static boolean verificaAnoBisexto(int ano, int bissexto) {
 
         if (bissexto % 400 == 0) {
@@ -170,9 +200,21 @@ public class Calendario {
         }
 
     }
-
-    public static int qntDias(int data, int conhecida, int ad, int ac, int md, int mc, int dd,
-            int dc, int bissexto) throws ParseException {
+    
+    /**
+     * Metodo que retorna a quantidade de dias entre duas datas distintas.
+     *
+     * @param ad - int - ano da data cujo o dia da semana é desconhecido
+     * @param ac - int - ano da data cujo o dia da semana é conhecido
+     * @param md - int - mes da data cujo o dia da semana é desconhecido
+     * @param mc - int - mes da data cujo o dia da semana é conhecido
+     * @param dd - int - dia da data cujo o dia da semana é desconhecido
+     * @param dc - int - dia da data cujo o dia da semana é conhecido
+     * @param bissexto - int - ano bissexto de referencia.
+     * @return - int - quantidade de dias entre as duas datas
+     */
+    public static int qntDias(int ad, int ac, int md, int mc, int dd, int dc,
+            int bissexto) {
 
         int ano, mes, dia, qntdia = 0, totDia = 0;
         int[] d = new int[2];
